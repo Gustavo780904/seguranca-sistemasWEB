@@ -35,26 +35,40 @@ public class Criptografia1 {
 
 		String mensagem = s.nextLine();
 
-		//converte a mensagem (string) em caracteres
-		char[] caracteres = mensagem.toCharArray();
-
-		int tamanhoMsg = mensagem.length();
-		int diferenca = tamanhoMsg % 5;
-		if (diferenca != 0 || diferenca != 5) {
-			tamanhoMsg =+ tamanhoMsg - diferenca;
+		//tamanho da mensagem
+		int tamanho = mensagem.length();
+		//calcular o resto da divisão por 5
+		int resto = tamanho%5;
+		//se não for exato, calcula quanto somar para adicionar 0
+		int somar = 0;
+		if (resto !=0) {
+			somar = 5 - resto;			
 		}
-			
-		for (int i = 0; i < tamanhoMsg; i++) {
+		
+		int charTamanho = tamanho + somar;
+		char [] msgConvertida =  new char [ charTamanho ];
+		msgConvertida = mensagem.toCharArray();
+		
+		for (int i= tamanho+somar; i< charTamanho; i++) {
+			msgConvertida[i]=0;
+		}
+		
+		for (int i = 0; i < msgConvertida.length; i++) {
 
 			for (int j = 0; j < 5; j++) {
-				caracteres[i] += senha[j];
-				i++;
+				msgConvertida[i] += senha[j];
+			i++;
 			}
 			i++;
 		}
-
-
-		System.out.println(caracteres);
+		
+		
+		System.out.println(resto);
+		System.out.println(somar);
+		System.out.println(msgConvertida);
+		System.out.println(msgConvertida.length);
+		System.out.println(charTamanho);
+//		System.out.println(msgConvertida[15]);
 
 		s.close();
 	}
